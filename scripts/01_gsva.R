@@ -17,7 +17,8 @@
 #   results/gsva_scores_hallmark.rds  — samples x Hallmark pathway scores
 #   results/gsva_scores_reactome.rds  — samples x Reactome pathway scores
 #   figures/gsva_heatmap_hallmark.png — heatmap annotated by cohort
-#   figures/gsva_heatmap_reactome.png — heatmap top variable Reactome pathways
+#   figures/gsva_heatmap_reactome.png — generated but not committed to repo
+#                                        (Reactome findings discussed in README)
 #   figures/gsva_boxplot_hallmark.png — top discriminating pathways per cohort
 # ==============================================================================
 

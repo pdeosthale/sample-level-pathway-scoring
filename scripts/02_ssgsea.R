@@ -4,8 +4,10 @@
 #
 # Part of: sample-level-pathway-scoring
 # Purpose: Assign per-sample pathway activity scores using ssGSEA.
-#          Unlike GSVA, ssGSEA scores are not bounded — they reflect
-#          absolute enrichment of a gene set in each sample's ranked list.
+#          Scores are computed independently per sample — adding or removing
+#          samples does not change existing scores. normalize = TRUE is used,
+#          which rescales scores per run; the exact range is implementation-
+#          and dataset-dependent.
 #
 # Resources: MSigDB Hallmark (50 gene sets), Reactome (~1,500 pathways)
 #
@@ -17,7 +19,8 @@
 #   results/ssgsea_scores_hallmark.rds
 #   results/ssgsea_scores_reactome.rds
 #   figures/ssgsea_heatmap_hallmark.png
-#   figures/ssgsea_heatmap_reactome.png
+#   figures/ssgsea_heatmap_reactome.png — generated but not committed to repo
+#                                          (Reactome findings discussed in README)
 #   figures/ssgsea_boxplot_hallmark.png
 # ==============================================================================
 
