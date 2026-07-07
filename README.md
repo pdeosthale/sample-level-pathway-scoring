@@ -78,10 +78,8 @@ sample-level-pathway-scoring/
 │
 └── figures/
     ├── gsva_heatmap_hallmark.png
-    ├── gsva_heatmap_reactome.png
     ├── gsva_boxplot_hallmark.png
     ├── ssgsea_heatmap_hallmark.png
-    ├── ssgsea_heatmap_reactome.png
     ├── ssgsea_boxplot_hallmark.png
     ├── compare_top_pathways.png
     ├── longitudinal_trajectories.png
@@ -120,13 +118,13 @@ Kruskal-Wallis test across 5 cohorts per pathway, BH-corrected FDR. Top 6 pathwa
 
 GSVA Hallmark scores clearly separate infection cohorts in unsupervised clustering. Bacterial infection shows elevated angiogenesis, IL-6/JAK-STAT3, and TNFα/NF-κB signaling, and suppressed MYC targets, oxidative phosphorylation, and G2M checkpoint. Influenza shows the strongest interferon gamma and interferon alpha response signals. COVID-19 and CoV other cluster together with intermediate interferon scores.
 
-Top variable Reactome pathways include SARS-CoV-2 and influenza-specific translation machinery pathways, B cell receptor signaling, and complement activation — consistent with the differential expression findings in `infectious-disease-transcriptomics`.
+Running the same GSVA analysis with Reactome (625 pathways after size filtering) illustrates an important property of gene set choice: Reactome's finer granularity surfaces pathogen-specific signatures that Hallmark's curated gene sets miss entirely. The top variable Reactome pathways include SARS-CoV-2- and influenza-specific translation machinery pathways (e.g. "SARS-CoV-2 modulates host translation machinery", "Influenza viral RNA transcription and replication"), which cluster cleanly by pathogen in unsupervised analysis — only possible because Reactome contains pathogen-specific gene sets that Hallmark does not. B cell receptor signaling and complement activation pathways also rank highly, consistent with the differential expression findings in `infectious-disease-transcriptomics`. Reactome heatmaps are not included as figures in this repository — the Hallmark figures carry the GSVA vs ssGSEA comparison more cleanly — but the scripts produce them and the observation stands: when pathogen identity rather than host response category is the question, a more granular gene set database is the appropriate choice.
 
 ### Cross-cohort ssGSEA vs GSVA
 
-Running ssGSEA on the same 152-sample cross-cohort dataset illustrates its limitations for this use case. ssGSEA scores are compressed between 0.2 and 0.7 — all positive across all cohorts and pathways. The same biological differences visible in GSVA are present but with much smaller absolute differences, reducing statistical power and visual interpretability.
+Running ssGSEA on the same 152-sample cross-cohort dataset illustrates a practical limitation for this use case. In this dataset, ssGSEA scores are all positive and span a narrower range than GSVA — the same biological differences are present but with smaller absolute differences between cohorts, reducing statistical power and visual interpretability.
 
-The figure below shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly above or below 0 for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrow positive range — illustrating that ssGSEA is not designed for cross-cohort comparison.
+The figure below shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly separated for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrower range — illustrating that ssGSEA may be less sensitive than GSVA for cross-cohort comparison in this dataset.
 
 ### Analysis 2: Longitudinal COVID-19 ssGSEA
 
@@ -166,5 +164,4 @@ The heatmap (z-scored per pathway) recapitulates the same structure across all 5
 
 ## Reference
 
-McClain MT, Constantine FJ, Henao R, et al. Dysregulated transcriptional responses to SARS-CoV-2 in the periphery. *Nat Commun.* 2021;12:1079. https://doi.org/10.1038/s41467-021-21289-y# sample-level-pathway-scoring
-# sample-level-pathway-scoring
+McClain MT, Constantine FJ, Henao R, et al. Dysregulated transcriptional responses to SARS-CoV-2 in the periphery. *Nat Commun.* 2021;12:1079. https://doi.org/10.1038/s41467-021-21289-y#
