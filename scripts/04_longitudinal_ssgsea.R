@@ -259,6 +259,11 @@ cat("\n=== Step 5: Heatmap ordered by timepoint ===\n")
 # the disease course while preserving row clustering structure.
 ssgsea_z <- t(scale(t(ssgsea_long)))
 
+# Subset to top 25 pathways by variance of z-scores across samples.
+# Reduces visual clutter while retaining the most variable pathways.
+top25_rows <- names(sort(apply(ssgsea_z, 1, var), decreasing = TRUE))[1:25]
+ssgsea_z   <- ssgsea_z[top25_rows, ]
+
 # Order samples: early → middle → late
 timepoint_order <- order(covid_longitudinal$timepoint)
 
