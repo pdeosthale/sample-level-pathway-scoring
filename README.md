@@ -164,4 +164,8 @@ The heatmap (z-scored per pathway) recapitulates the same structure across all 5
 
 ## Reference
 
-McClain MT, Constantine FJ, Henao R, et al. Dysregulated transcriptional responses to SARS-CoV-2 in the periphery. *Nat Commun.* 2021;12:1079. https://doi.org/10.1038/s41467-021-21289-y#
+McClain MT, Constantine FJ, Henao R, et al. Dysregulated transcriptional responses to SARS-CoV-2 in the periphery. *Nat Commun.* 2021;12:1079. https://doi.org/10.1038/s41467-021-21289-y
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
