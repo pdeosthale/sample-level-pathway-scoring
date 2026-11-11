@@ -54,7 +54,7 @@ distributions on GSE161731.
 |---|---|---|
 | [GSE161731](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161731) | McClain et al. 2021, *Nat Commun* | Blood transcriptomics: COVID-19, CoV other, Bacterial, Influenza, Healthy |
 
-**Analysis 1 — Cross-cohort (GSVA):** 152 samples, one per subject (earliest timepoint). COVID-19 n=46, CoV other n=48, Bacterial n=23, Influenza n=17, Healthy n=18.
+**Analysis 1 — Cross-cohort (GSVA):** 152 samples, one per subject (earliest timepoint). COVID-19 n=46, CoV other n=48, Bacterial n=23, Influenza n=17, Healthy n=18. This differs from the 136-sample analysis set in `infectious-disease-transcriptomics`: scoring needs no age or gender covariates, so the gender/age filters and the removal of two cross-cohort subjects applied in that repo's DE analysis are not applied here.
 
 **Analysis 2 — Longitudinal COVID-19 (ssGSEA):** 31 COVID-19 samples from the 14 subjects who have multiple timepoints (early/middle/late). Analysis 1 uses only each subject's earliest sample, to avoid pseudoreplication; the later timepoints appear only here, where they are the primary data.
 
@@ -126,7 +126,7 @@ Running the same GSVA analysis with Reactome (625 pathways after size filtering)
 
 Running ssGSEA on the same 152-sample cross-cohort dataset illustrates a practical limitation for this use case. In this dataset, ssGSEA scores are all positive and span a narrower range than GSVA — the same biological differences are present but with smaller absolute differences between cohorts, reducing statistical power and visual interpretability.
 
-The figure below shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly separated for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrower range — illustrating that ssGSEA may be less sensitive than GSVA for cross-cohort comparison in this dataset.
+The figure (`figures/compare_top_pathways.png`) shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly separated for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrower range — illustrating that ssGSEA may be less sensitive than GSVA for cross-cohort comparison in this dataset.
 
 ### Analysis 2: Longitudinal COVID-19 ssGSEA
 
