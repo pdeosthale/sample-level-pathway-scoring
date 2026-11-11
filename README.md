@@ -56,7 +56,7 @@ distributions on GSE161731.
 
 **Analysis 1 — Cross-cohort (GSVA):** 152 samples, one per subject (earliest timepoint). COVID-19 n=46, CoV other n=48, Bacterial n=23, Influenza n=17, Healthy n=18.
 
-**Analysis 2 — Longitudinal COVID-19 (ssGSEA):** 31 COVID-19 samples with multiple timepoints (early/middle/late) from 14 subjects. These samples were excluded from Analysis 1 to avoid pseudoreplication — here they are the primary data.
+**Analysis 2 — Longitudinal COVID-19 (ssGSEA):** 31 COVID-19 samples from the 14 subjects who have multiple timepoints (early/middle/late). Analysis 1 uses only each subject's earliest sample, to avoid pseudoreplication; the later timepoints appear only here, where they are the primary data.
 
 ---
 
@@ -130,7 +130,7 @@ The figure below shows the top discriminating Hallmark pathways for both methods
 
 ### Analysis 2: Longitudinal COVID-19 ssGSEA
 
-ssGSEA was applied to 31 COVID-19 samples from 14 subjects with multiple timepoints (early/middle/late), excluded from Analysis 1 to avoid pseudoreplication. Pathway selection for trajectory plots used variance of per-timepoint means rather than cross-sample variance, to select pathways with genuine temporal signal rather than high inter-subject noise.
+ssGSEA was applied to 31 COVID-19 samples from 14 subjects with multiple timepoints (early/middle/late), with only each subject's earliest sample used in Analysis 1 to avoid pseudoreplication. Pathway selection for trajectory plots used variance of per-timepoint means rather than cross-sample variance, to select pathways with genuine temporal signal rather than high inter-subject noise.
 
 **Innate immune contraction:** Interferon alpha and interferon gamma response both show the strongest early → late decline of any pathways in the panel (IFN alpha: ~0.82 → 0.50; IFN gamma: ~0.72 → 0.63). The parallel trajectories of both interferon arms — with tight SE ribbons and consistent subject-level directionality — suggest coordinated contraction of the acute antiviral response over the disease course rather than noise.
 
