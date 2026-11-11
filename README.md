@@ -24,9 +24,11 @@ dynamic range and improved sensitivity for detecting between-group differences.
 
 **Use ssGSEA when** you need pathway scores that are computed independently
 for each sample — for example, in single-patient analyses, longitudinal
-studies, or when ranking pathways within individual samples. Because each
-sample is scored independently, adding or removing samples does not alter
-existing scores.
+studies, or when ranking pathways within individual samples. Each sample's
+enrichment is computed independently of the others. With `normalize = FALSE`,
+adding or removing samples does not alter existing scores; with the default
+`normalize = TRUE`, scores are rescaled by the min–max range across the
+dataset, so their absolute values depend on which samples are included.
 
 **For between-group comparisons,** ssGSEA can still be used with standard
 statistical tests (Wilcoxon, limma, etc.), but its scores may exhibit a
@@ -42,7 +44,7 @@ distributions on GSE161731.
 | Unsupervised clustering / heatmap across many samples | GSVA |
 | How does a patient's pathway activity change over time? | ssGSEA |
 | Which pathways are most active in this one sample? | ssGSEA |
-| Adding new samples without recalculating existing scores | ssGSEA |
+| Adding new samples without recalculating existing scores | ssGSEA with `normalize = FALSE` |
 
 ---
 
@@ -104,7 +106,7 @@ MSigDB Hallmark (50 gene sets) and Reactome (~1,839 pathways, filtered to 15–5
 
 ### ssGSEA (Analysis 2)
 
-`GSVA::ssgseaParam()` with `normalize = TRUE`. Run on 31 COVID-19 longitudinal samples. Scores are computed independently per sample — adding new timepoints does not change existing scores.
+`GSVA::ssgseaParam()` with `normalize = TRUE`. Run on 31 COVID-19 longitudinal samples. Each sample's enrichment is computed independently, but with `normalize = TRUE` the scores are rescaled by the dataset-wide min–max range, so adding new timepoints can shift existing scores (raw, un-normalized scores would not change). Scores are therefore comparable within this 31-sample run, not across runs with different sample sets.
 
 ### Discriminating Pathways
 
@@ -146,7 +148,7 @@ The heatmap (z-scored per pathway) recapitulates the same structure across all 5
 
 **Language:** R
 
-**Sample-level scoring:** GSVA (v1.50+)
+**Sample-level scoring:** GSVA v2.4.9
 
 **Gene sets:** msigdbr (Hallmark, Reactome)
 
