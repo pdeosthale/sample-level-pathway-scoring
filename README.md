@@ -130,15 +130,17 @@ The figure (`figures/compare_top_pathways.png`) shows the top discriminating Hal
 
 ### Analysis 2: Longitudinal COVID-19 ssGSEA
 
-ssGSEA was applied to 31 COVID-19 samples from 14 subjects with multiple timepoints (early/middle/late), with only each subject's earliest sample used in Analysis 1 to avoid pseudoreplication. Pathway selection for trajectory plots used variance of per-timepoint means rather than cross-sample variance, to select pathways with genuine temporal signal rather than high inter-subject noise.
+ssGSEA was applied to 31 COVID-19 samples from 14 subjects with multiple timepoints (early/middle/late), with only each subject's earliest sample used in Analysis 1 to avoid pseudoreplication. Pathway selection for trajectory plots used variance of per-timepoint means rather than cross-sample variance, to prioritize pathways whose group means change most over time rather than those with high inter-subject variability.
 
-**Innate immune contraction:** Interferon alpha and interferon gamma response both show the strongest early → late decline of any pathways in the panel (IFN alpha: ~0.82 → 0.50; IFN gamma: ~0.72 → 0.63). The parallel trajectories of both interferon arms — with tight SE ribbons and consistent subject-level directionality — suggest coordinated contraction of the acute antiviral response over the disease course rather than noise.
+**Innate immune contraction:** Interferon alpha and interferon gamma response both decline from early to late (IFN alpha: ~0.82 → 0.50; IFN gamma: ~0.72 → 0.63), with narrow SE ribbons in the trajectory plot. The two interferon arms move in the same direction, consistent with contraction of the acute antiviral response over the disease course.
 
-**Proliferative and metabolic suppression:** E2F targets, G2M checkpoint, MTORC1 signaling, and MYC targets V1 all decline monotonically from early to late. This pattern is consistent with progressive lymphopenia and T cell exhaustion reported in severe COVID-19, and with metabolic reprogramming away from anabolic growth programs during sustained infection.
+**Proliferative and metabolic suppression:** E2F targets, G2M checkpoint, MTORC1 signaling, and MYC targets V1 all decline from early to late. This is consistent with reports of lymphopenia and T cell dysfunction in COVID-19, and with a shift away from anabolic growth programs, but this repository does not test those explanations.
 
-**Erythroid/myeloid expansion:** Heme metabolism rises steadily from early to late, potentially reflecting erythropoietic recovery or expanding neutrophil/monocyte populations as infection resolves.
+**Erythroid/myeloid expansion:** Heme metabolism has higher mean scores at later timepoints, possibly reflecting erythropoietic recovery or changes in neutrophil/monocyte populations; this is speculative and not tested here.
 
 **Note:** Hedgehog signaling rises late but shows wide inter-subject variance. Hallmark HEDGEHOG is a small gene set and this trajectory should be interpreted cautiously.
+
+**Interpretation:** These trajectories are descriptive. They come from 14 subjects (31 samples, with different numbers of timepoints per subject), the pathway panel was selected by temporal variance of group means, and no formal trend or mixed-model test was run. Treat them as exploratory.
 
 The heatmap (z-scored per pathway) recapitulates the same structure across all 50 Hallmark pathways. A coherent early-high, late-low cluster encompasses the interferon, proliferative (E2F, G2M, MYC, MTORC1), and metabolic (oxidative phosphorylation, cholesterol homeostasis) pathways. A second cluster of pathways (inflammatory response, complement, coagulation, IL6-JAK-STAT3) shows more heterogeneous subject-level patterns without a clear directional trajectory, reflecting the known inter-individual variability in innate immune activation in COVID-19.
 
