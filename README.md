@@ -11,7 +11,7 @@ GSVA and ssGSEA are both sample-level pathway scoring methods but answer fundame
 - **GSVA** asks: *which pathways are relatively more active in this sample compared to other samples?*
 - **ssGSEA** asks: *which pathways are absolutely enriched within this individual sample, independent of any reference group?*
 
-This repository demonstrates both methods on the same dataset using study designs matched to each method's strengths — cross-cohort comparison for GSVA, longitudinal patient trajectories for ssGSEA.
+This repository demonstrates both methods on the same dataset using study designs matched to each method's strengths: cross-cohort comparison for GSVA and longitudinal patient trajectories for ssGSEA.
 
 ---
 
@@ -23,7 +23,7 @@ variation across all samples in the matrix, which often provides greater
 dynamic range and improved sensitivity for detecting between-group differences.
 
 **Use ssGSEA when** you need pathway scores that are computed independently
-for each sample — for example, in single-patient analyses, longitudinal
+for each sample, for example in single-patient analyses, longitudinal
 studies, or when ranking pathways within individual samples. Each sample's
 enrichment is computed independently of the others. With `normalize = FALSE`,
 adding or removing samples does not alter existing scores; with the default
@@ -35,7 +35,7 @@ statistical tests (Wilcoxon, limma, etc.), but its scores may exhibit a
 narrower dynamic range than GSVA in some datasets and implementations,
 potentially reducing statistical power and making visual separation of groups
 less pronounced. This repository demonstrates both use cases on the same
-dataset — see `compare_top_pathways.png` for a direct comparison of score
+dataset. See `compare_top_pathways.png` for a direct comparison of score
 distributions on GSE161731.
 
 | Scenario | Method |
@@ -54,9 +54,9 @@ distributions on GSE161731.
 |---|---|---|
 | [GSE161731](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE161731) | McClain et al. 2021, *Nat Commun* | Blood transcriptomics: COVID-19, CoV other, Bacterial, Influenza, Healthy |
 
-**Analysis 1 — Cross-cohort (GSVA):** 152 samples, one per subject (earliest timepoint). COVID-19 n=46, CoV other n=48, Bacterial n=23, Influenza n=17, Healthy n=18. This differs from the 136-sample analysis set in `infectious-disease-transcriptomics`: scoring needs no age or gender covariates, so the gender/age filters and the removal of two cross-cohort subjects applied in that repo's DE analysis are not applied here.
+**Analysis 1 (Cross-cohort, GSVA):** 152 samples, one per subject (earliest timepoint). COVID-19 n=46, CoV other n=48, Bacterial n=23, Influenza n=17, Healthy n=18. This differs from the 136-sample analysis set in `infectious-disease-transcriptomics`: scoring needs no age or gender covariates, so the gender/age filters and the removal of two cross-cohort subjects applied in that repo's DE analysis are not applied here.
 
-**Analysis 2 — Longitudinal COVID-19 (ssGSEA):** 31 COVID-19 samples from the 14 subjects who have multiple timepoints (early/middle/late). Analysis 1 uses only each subject's earliest sample, to avoid pseudoreplication; the later timepoints appear only here, where they are the primary data.
+**Analysis 2 (Longitudinal COVID-19, ssGSEA):** 31 COVID-19 samples from the 14 subjects who have multiple timepoints (early/middle/late). Analysis 1 uses only each subject's earliest sample, to avoid pseudoreplication; the later timepoints appear only here, where they are the primary data.
 
 ---
 
@@ -120,13 +120,13 @@ Kruskal-Wallis test across 5 cohorts per pathway, BH-corrected FDR. Top 6 pathwa
 
 GSVA Hallmark scores clearly separate infection cohorts in unsupervised clustering. Bacterial infection shows elevated angiogenesis, IL-6/JAK-STAT3, and TNFα/NF-κB signaling, and suppressed MYC targets, oxidative phosphorylation, and G2M checkpoint. Influenza shows the strongest interferon gamma and interferon alpha response signals. COVID-19 and CoV other cluster together with intermediate interferon scores.
 
-Running the same GSVA analysis with Reactome (625 pathways after size filtering) illustrates an important property of gene set choice: Reactome's finer granularity surfaces pathogen-specific signatures that Hallmark's curated gene sets miss entirely. The top variable Reactome pathways include SARS-CoV-2- and influenza-specific translation machinery pathways (e.g. "SARS-CoV-2 modulates host translation machinery", "Influenza viral RNA transcription and replication"), which cluster cleanly by pathogen in unsupervised analysis — only possible because Reactome contains pathogen-specific gene sets that Hallmark does not. B cell receptor signaling and complement activation pathways also rank highly, consistent with the differential expression findings in `infectious-disease-transcriptomics`. Reactome heatmaps are not included as figures in this repository — the Hallmark figures carry the GSVA vs ssGSEA comparison more cleanly — but the scripts produce them and the observation stands: when pathogen identity rather than host response category is the question, a more granular gene set database is the appropriate choice.
+Running the same GSVA analysis with Reactome (625 pathways after size filtering) illustrates an important property of gene set choice: Reactome's finer granularity surfaces pathogen-specific signatures that Hallmark's curated gene sets miss entirely. The top variable Reactome pathways include SARS-CoV-2 and influenza-specific translation machinery pathways (e.g. "SARS-CoV-2 modulates host translation machinery", "Influenza viral RNA transcription and replication"), which cluster cleanly by pathogen in unsupervised analysis, which is only possible because Reactome contains pathogen-specific gene sets that Hallmark does not. B cell receptor signaling and complement activation pathways also rank highly, consistent with the differential expression findings in `infectious-disease-transcriptomics`. Reactome heatmaps are not included as figures in this repository, because the Hallmark figures carry the GSVA vs ssGSEA comparison more cleanly, but the scripts produce them and the observation stands: when pathogen identity rather than host response category is the question, a more granular gene set database is the appropriate choice.
 
 ### Cross-cohort ssGSEA vs GSVA
 
-Running ssGSEA on the same 152-sample cross-cohort dataset illustrates a practical limitation for this use case. In this dataset, ssGSEA scores are all positive and span a narrower range than GSVA — the same biological differences are present but with smaller absolute differences between cohorts, reducing statistical power and visual interpretability.
+Running ssGSEA on the same 152-sample cross-cohort dataset illustrates a practical limitation for this use case. In this dataset, ssGSEA scores are all positive and span a narrower range than GSVA. The same biological differences are present but with smaller absolute differences between cohorts, reducing statistical power and visual interpretability.
 
-The figure (`figures/compare_top_pathways.png`) shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly separated for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrower range — illustrating that ssGSEA may be less sensitive than GSVA for cross-cohort comparison in this dataset.
+The figure (`figures/compare_top_pathways.png`) shows the top discriminating Hallmark pathways for both methods side by side. GSVA (top row) shows cohorts clearly separated for each pathway. ssGSEA (bottom row) shows the same ordering of cohorts but compressed into a narrower range, which illustrates that ssGSEA may be less sensitive than GSVA for cross-cohort comparison in this dataset.
 
 ### Analysis 2: Longitudinal COVID-19 ssGSEA
 
@@ -160,9 +160,9 @@ The heatmap (z-scored per pathway) recapitulates the same structure across all 5
 
 ## Relationship to Other Repositories
 
-- `infectious-disease-transcriptomics` — group-level DE and pathway enrichment on the same GSE161731 dataset
-- `Pathway-enrichment-comparison` — ORA/GSEA/CAMERA benchmarking on GSE193336 macrophage LPS data
-- `sample-level-pathway-scoring` (this repo) — per-sample pathway activity scoring, demonstrating GSVA for cross-cohort and ssGSEA for longitudinal use cases
+- `infectious-disease-transcriptomics`: group-level DE and pathway enrichment on the same GSE161731 dataset
+- `Pathway-enrichment-comparison`: ORA/GSEA/CAMERA benchmarking on GSE193336 macrophage LPS data
+- `sample-level-pathway-scoring` (this repo): per-sample pathway activity scoring, demonstrating GSVA for cross-cohort and ssGSEA for longitudinal use cases
 
 ---
 
@@ -172,4 +172,4 @@ McClain MT, Constantine FJ, Henao R, et al. Dysregulated transcriptional respons
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE) for details.
