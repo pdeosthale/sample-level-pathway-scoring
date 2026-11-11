@@ -160,8 +160,8 @@ The heatmap (z-scored per pathway) recapitulates the same structure across all 5
 
 ## Relationship to Other Repositories
 
-- `infectious-disease-transcriptomics`: group-level DE and pathway enrichment on the same GSE161731 dataset
-- `Pathway-enrichment-comparison`: ORA/GSEA/CAMERA benchmarking on GSE193336 macrophage LPS data
+- [`infectious-disease-transcriptomics`](https://github.com/pdeosthale/infectious-disease-transcriptomics): group-level DE and pathway enrichment on the same GSE161731 dataset
+- [`Pathway-enrichment-comparison`](https://github.com/pdeosthale/Pathway-enrichment-comparison): ORA/GSEA/CAMERA benchmarking on GSE193336 macrophage LPS data
 - `sample-level-pathway-scoring` (this repo): per-sample pathway activity scoring, demonstrating GSVA for cross-cohort and ssGSEA for longitudinal use cases
 
 ---
